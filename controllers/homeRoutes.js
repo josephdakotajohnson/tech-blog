@@ -27,15 +27,16 @@ router.get('/blog/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
-        {
-          model: User
+        User, {
+          model: Comments,
+          include: [User]
         },
       ],
     });
 
     const blog = blogData.get({ plain: true });
-
-    res.render('blog', {
+    console.log(blog);
+    res.render('singleblog', {
       ...blog,
       logged_in: req.session.logged_in
     });
@@ -55,18 +56,44 @@ router.get('/profile', withAuth, async (req, res) => {
 
     // const user = userData.get({ plain: true });
 
-    const blogData = await Blog.findAll({ where: {user_id:req.session.user_id} });
+    const blogData = await Blog.findAll({ where: {user_id:req.session.user_id}, include: [User] });
 
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
-
+    console.log('profile ---------')
+    console.log(blogs);
+    console.log('---------')
     let showBlogs;
 
     if (blogs.length > 0) { showBlogs = true; }
 
     res.render('dashboard', {
-      ...blogs,
+      blogs,
       logged_in: true,
-      showBlogs
+      showBlogs,
+      username: req.session.username
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/update/:id', async (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        User, {
+          model: Comments,
+          include: [User]
+        },
+      ],
+    });
+
+    const blog = blogData.get({ plain: true });
+    console.log(blog);
+    res.render('updateBlog', {
+      ...blog,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);

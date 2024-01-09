@@ -1,0 +1,21 @@
+<div class="text-center">
+    <label>New Title</label>
+        <input class='btn btn-primary' type='text' id='title' value={{title}}></input>
+
+        {{!-- <p>{{{get_emoji}}}</p> --}}
+        <textarea id='post' rows="15" cols="200">{{post}}</textarea> {{!-- A mobile app that will send you notifications whenever a concert is playing in your area. Yo YO yo --}}
+
+        <p>Created by {{user.username}} on {{format_date date_created}}</p>
+        <p>
+            <span for="img" aria-label="money">💲</span>
+            {{!-- <span class="dollar-amount">{{format_amount needed_funding}}</span> --}}
+            needed
+        </p>
+        {{!-- <p>
+            <button class="">Fund this Project!</button>
+        </p> --}}
+        <button class="btn btn-primary" id="update">Update!</button>
+        <button class="btn btn-danger" id="delete">Delete!</button>
+</div>
+
+<script src="../js/update.js"></script>
