@@ -50,4 +50,4 @@ I want to build a CMS-style blog site similar to a Wordpress site.
 
 ## DeployedApp
 
- - This is a link to the fully deployed application: (https://josephdakotajohnson.github.io/tech-blog/).
+ - This is a link to the fully deployed application: (https://tech-blog-1-5d0041176299.herokuapp.com/).
